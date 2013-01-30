@@ -42,6 +42,20 @@ USE_L10N = os.environ.get('USE_L10N', True) == True
 # If you set this to False, Django will not use timezone-aware datetimes.
 USE_TZ = os.environ.get('USE_TZ', True) == True
 
+# The media storage backend used by this application. Override to
+# upload to S3 in production for example.
+DEFAULT_FILE_STORAGE = os.environ.get(
+    'DEFAULT_FILE_STORAGE',
+    'django.core.files.storage.FileSystemStorage')
+
+# The static assets storage backend used by this application when
+# invoking `collectstatic`. Override to upload to S3 in production for
+# example.
+STATICFILES_STORAGE = os.environ.get(
+    'STATICFILES_STORAGE',
+    'django.contrib.staticfiles.storage.StaticFilesStorage')
+
+
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/var/www/example.com/media/"
 MEDIA_ROOT = os.environ.get('MEDIA_ROOT',
@@ -105,7 +119,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.media',
     'django.core.context_processors.static',
     'django.core.context_processors.tz',
-    'django.contrib.messages.context_processors.messages'
+    'django.contrib.messages.context_processors.messages',
     'django.core.context_processors.request',
 )
 
